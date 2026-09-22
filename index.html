@@ -1,0 +1,420 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="EverLeaf is the tissue box that finally earns a spot on your table. A premium planter that quietly dispenses tissues, with a leaf that droops when it is time to refill.">
+<meta property="og:title" content="EverLeaf — kick the tissue box to the curb">
+<meta property="og:description" content="EverLeaf is the tissue box that finally earns a spot on your table. A premium planter that quietly dispenses tissues, with a leaf that droops when it is time to refill.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="favicon.png">
+<title>EverLeaf</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500&family=Hanken+Grotesk:wght@400;500;600;700&display=swap">
+<style>
+  :root{
+    --ground:#f3f7ef;
+    --surface:#ffffff;
+    --ink:#1a2a1c;
+    --ink-soft:#3c4f3e;
+    --muted:#627062;
+    --line:#dde8d6;
+    --green:#3f9d55;
+    --green-deep:#2c7d41;
+    --green-dk:#1f5e31;
+    --bloom:#fbfdf8;
+    --gold:#b7892b;
+    --pot:#f4f6f1;
+    --pot-sh:#e4ebde;
+    --shadow:0 2px 6px rgba(26,42,28,.06), 0 18px 50px rgba(31,94,49,.10);
+  }
+  :root:not([data-theme="light"]){
+    @media (prefers-color-scheme: dark){
+      --ground:#10160e;
+      --surface:#18200f15;
+      --surface:#1a2215;
+      --ink:#eef4e8;
+      --ink-soft:#c2d2ba;
+      --muted:#93a78b;
+      --line:#2a361f;
+      --green:#62bd78;
+      --green-deep:#84cf97;
+      --green-dk:#a7e0b6;
+      --bloom:#eaf2e4;
+      --gold:#d8ab52;
+      --pot:#222b1a;
+      --pot-sh:#2c381f;
+      --shadow:0 2px 6px rgba(0,0,0,.35), 0 20px 55px rgba(0,0,0,.45);
+    }
+  }
+  :root[data-theme="dark"]{
+    --ground:#10160e;--surface:#1a2215;--ink:#eef4e8;--ink-soft:#c2d2ba;--muted:#93a78b;
+    --line:#2a361f;--green:#62bd78;--green-deep:#84cf97;--green-dk:#a7e0b6;--bloom:#eaf2e4;
+    --gold:#d8ab52;--pot:#222b1a;--pot-sh:#2c381f;--shadow:0 2px 6px rgba(0,0,0,.35), 0 20px 55px rgba(0,0,0,.45);
+  }
+
+  *{box-sizing:border-box}
+  body{
+    margin:0;background:var(--ground);color:var(--ink);
+    font-family:"Hanken Grotesk",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+    line-height:1.55;-webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:1080px;margin:0 auto;padding:0 22px}
+  a{color:inherit}
+
+  /* nav */
+  nav{display:flex;align-items:center;justify-content:space-between;padding-block:22px}
+  .brand{display:flex;align-items:center;gap:10px;font-family:"Fraunces",serif;font-weight:600;font-size:22px;letter-spacing:-.01em}
+  .brand svg{width:26px;height:26px}
+  .navcta{font-size:14px;font-weight:600;color:var(--green-deep);text-decoration:none;border:1px solid var(--line);
+    padding:9px 16px;border-radius:999px;background:var(--surface);transition:.2s}
+  .navcta:hover{border-color:var(--green);color:var(--green-deep)}
+
+  /* hero */
+  .hero{display:grid;grid-template-columns:1.05fr .95fr;gap:36px;align-items:center;padding-block:30px 54px}
+  @media (max-width:820px){.hero{grid-template-columns:1fr;gap:10px;text-align:left}}
+  .eyebrow{font-size:12.5px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--green-deep);margin-bottom:16px}
+  h1{font-family:"Fraunces",serif;font-weight:600;font-size:clamp(38px,6.4vw,64px);line-height:1.02;letter-spacing:-.02em;margin:0;text-wrap:balance}
+  h1 em{font-style:italic;color:var(--green-deep)}
+  .lede{font-size:clamp(17px,2.3vw,20px);color:var(--ink-soft);max-width:46ch;margin:20px 0 28px}
+  .actions{display:flex;gap:12px;flex-wrap:wrap;align-items:center}
+  .btn{font-family:inherit;font-size:15.5px;font-weight:600;border-radius:999px;padding:14px 26px;cursor:pointer;border:1px solid transparent;text-decoration:none;display:inline-block;transition:.2s}
+  .btn-primary{background:var(--green-deep);color:#fff}
+  .btn-primary:hover{background:var(--green-dk)}
+  .btn-ghost{background:transparent;border-color:var(--line);color:var(--ink)}
+  .btn-ghost:hover{border-color:var(--green)}
+
+  /* stage illustration */
+  .stage{display:flex;justify-content:center;align-items:flex-end;min-height:360px}
+  .plant-svg{width:min(360px,82vw);height:auto;filter:drop-shadow(0 24px 30px rgba(31,94,49,.16))}
+  .ind-leaf{transform-box:fill-box;transform-origin:18% 30%;animation:droop 7s ease-in-out infinite}
+  @keyframes droop{
+    0%,12%{transform:rotate(0deg)}
+    45%,60%{transform:rotate(46deg) translateY(4px)}
+    92%,100%{transform:rotate(0deg)}
+  }
+  .bloom-pop{transform-box:fill-box;transform-origin:50% 100%;animation:sway 6s ease-in-out infinite}
+  @keyframes sway{0%,100%{transform:rotate(-1.2deg)}50%{transform:rotate(1.2deg)}}
+  @media (prefers-reduced-motion: reduce){.ind-leaf,.bloom-pop{animation:none}}
+  .stagecap{font-size:12.5px;color:var(--muted);text-align:center;margin-top:10px}
+  .stagecap b{color:var(--green-deep);font-weight:600}
+
+  /* section */
+  section.block{padding-block:52px;border-top:1px solid var(--line)}
+  .sectlabel{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--green-deep);margin-bottom:12px}
+  h2{font-family:"Fraunces",serif;font-weight:600;font-size:clamp(26px,4vw,38px);line-height:1.1;margin:0 0 14px;letter-spacing:-.01em;text-wrap:balance}
+  .blurb{color:var(--ink-soft);max-width:58ch;font-size:17px}
+
+  .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:34px}
+  @media (max-width:760px){.steps{grid-template-columns:1fr}}
+  .step{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:24px 22px;box-shadow:var(--shadow)}
+  .step .ic{width:44px;height:44px;border-radius:12px;background:color-mix(in srgb,var(--green) 16%,transparent);display:flex;align-items:center;justify-content:center;margin-bottom:14px}
+  .step .ic svg{width:24px;height:24px;stroke:var(--green-deep)}
+  .step h3{font-family:"Fraunces",serif;font-weight:600;font-size:20px;margin:0 0 7px}
+  .step p{color:var(--muted);font-size:14.5px;margin:0}
+
+  /* refill signal row */
+  .signal{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:30px}
+  @media (max-width:760px){.signal{grid-template-columns:1fr}}
+  .sig{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:22px;text-align:center}
+  .sig svg{width:64px;height:64px;margin-bottom:6px}
+  .sig .t{font-family:"Fraunces",serif;font-weight:600;font-size:18px}
+  .sig .d{color:var(--muted);font-size:13.5px;margin-top:2px}
+
+  /* gift band */
+  .gift{background:var(--surface);border:1px solid var(--line);border-radius:24px;padding:40px;box-shadow:var(--shadow);display:grid;grid-template-columns:1fr auto;gap:28px;align-items:center}
+  @media (max-width:760px){.gift{grid-template-columns:1fr;padding:28px}}
+  .tags{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px}
+  .tag{font-size:13px;font-weight:500;color:var(--ink-soft);background:color-mix(in srgb,var(--green) 10%,transparent);border:1px solid var(--line);padding:6px 13px;border-radius:999px}
+  .gift .price{text-align:right}
+  @media (max-width:760px){.gift .price{text-align:left}}
+  .gift .price .n{font-family:"Fraunces",serif;font-weight:600;font-size:40px;color:var(--green-deep);line-height:1}
+  .gift .price .c{color:var(--muted);font-size:13px;margin-top:4px}
+
+  .micro{font-size:13.5px;color:var(--muted);margin-top:16px}
+  .micro b{color:var(--green-deep);font-weight:600}
+
+  /* pricing ladder */
+  .plans{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:34px}
+  @media (max-width:760px){.plans{grid-template-columns:1fr}}
+  .plan{background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:24px 22px;display:flex;flex-direction:column;box-shadow:var(--shadow)}
+  .plan.feat{border-color:var(--green)}
+  .plan .pk{font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--green-deep);margin-bottom:8px;min-height:15px}
+  .plan h3{font-family:"Fraunces",serif;font-weight:600;font-size:21px;margin:0}
+  .plan .amt{font-family:"Fraunces",serif;font-weight:600;font-size:34px;color:var(--ink);line-height:1;margin:12px 0 2px}
+  .plan .amt span{font-size:15px;color:var(--muted);font-weight:500}
+  .plan .desc{color:var(--muted);font-size:14px;margin:10px 0 0}
+  .plan .desc strong{color:var(--ink-soft);font-weight:600}
+
+  /* founder */
+  .founder{display:grid;grid-template-columns:auto 1fr;gap:22px;align-items:start;max-width:760px}
+  @media (max-width:620px){.founder{grid-template-columns:1fr}}
+  .founder .mark{width:60px;height:60px;border-radius:50%;background:color-mix(in srgb,var(--green) 16%,transparent);display:flex;align-items:center;justify-content:center;flex:none}
+  .founder .mark svg{width:30px;height:30px;stroke:var(--green-deep)}
+  .founder p.q{font-family:"Fraunces",serif;font-style:italic;font-size:clamp(19px,2.5vw,24px);line-height:1.42;color:var(--ink);margin:0;text-wrap:balance}
+  .founder .sig{font-size:14px;color:var(--muted);margin-top:14px;font-weight:600}
+
+  /* faq */
+  .faq{margin-top:28px;display:grid;gap:10px;max-width:760px}
+  details{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:0 18px}
+  summary{cursor:pointer;font-weight:600;font-size:16px;padding:15px 0;list-style:none;display:flex;justify-content:space-between;align-items:center;gap:16px}
+  summary::-webkit-details-marker{display:none}
+  summary::after{content:"+";color:var(--green-deep);font-size:24px;font-weight:400;line-height:1}
+  details[open] summary::after{content:"\2013"}
+  details p{color:var(--muted);font-size:14.5px;margin:0 0 16px;max-width:64ch}
+
+  /* waitlist */
+  .signup{background:linear-gradient(165deg,var(--green-deep),var(--green-dk));color:#fff;border-radius:26px;padding:clamp(30px,5vw,52px);text-align:center;position:relative;overflow:hidden}
+  .signup h2{color:#fff}
+  .signup .blurb{color:rgba(255,255,255,.82);margin:0 auto 26px}
+  form{display:flex;gap:10px;max-width:440px;margin:0 auto;flex-wrap:wrap;justify-content:center}
+  form input{flex:1;min-width:220px;font-family:inherit;font-size:16px;padding:15px 18px;border-radius:999px;border:1px solid rgba(255,255,255,.3);background:rgba(255,255,255,.12);color:#fff}
+  form input::placeholder{color:rgba(255,255,255,.7)}
+  form input:focus{outline:2px solid #fff;background:rgba(255,255,255,.2)}
+  form button{background:var(--bloom);color:var(--green-dk);border:none;font-family:inherit;font-weight:700;font-size:16px;padding:15px 28px;border-radius:999px;cursor:pointer;transition:.2s}
+  form button:hover{transform:translateY(-1px)}
+  .done{font-size:17px;font-weight:600;margin-top:4px}
+  .fineprint{color:rgba(255,255,255,.7);font-size:13px;margin-top:16px}
+
+  footer{padding-block:34px;color:var(--muted);font-size:13.5px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;border-top:1px solid var(--line)}
+</style>
+</head>
+<body>
+
+
+<div class="wrap">
+  <nav>
+    <div class="brand">
+      <svg viewBox="0 0 48 48"><path d="M24 43C13 41 6.5 31 8 20.5 9.6 9.8 18.2 5 40 4c.6 8-.4 16.5-6 24.2C29.4 34.6 24 38 24 43Z" fill="var(--green)"/><path d="M31 12C24 17 18.5 25 16 40" fill="none" stroke="#ffffff" stroke-width="2.2" stroke-linecap="round" opacity=".5"/></svg>
+      <span><span style="color:var(--ink)">Ever</span><span style="color:var(--green-deep)">Leaf</span></span>
+    </div>
+    <a class="navcta" href="#waitlist">Join the waitlist</a>
+  </nav>
+
+  <div class="hero">
+    <div>
+      <div class="eyebrow">The houseplant with a secret</div>
+      <h1>Kick the tissue box <em>to the curb.</em></h1>
+      <p class="lede">EverLeaf is the tissue box that finally earns a spot on your table. A premium planter that quietly dispenses tissues, and when it runs low, a single leaf gently droops, as if the plant needs a little care. That's your cue to refill.</p>
+      <div class="actions">
+        <a class="btn btn-primary" href="#waitlist">Get notified at launch</a>
+        <a class="btn btn-ghost" href="#how">See how it works</a>
+      </div>
+      <p class="micro"><b>Coming soon to Kickstarter.</b> Join the list for early-bird pricing and a heads-up the moment we go live.</p>
+    </div>
+
+    <div>
+      <div class="stage">
+        <svg class="plant-svg" viewBox="0 0 320 372" role="img" aria-label="EverLeaf planter with a tissue bloom and a drooping indicator leaf">
+          <!-- back leaves -->
+          <g style="fill:var(--green)">
+            <path d="M150 150 C110 120 96 70 118 40 C150 66 164 104 158 150 Z" opacity=".92"/>
+            <path d="M170 150 C210 120 224 70 202 40 C170 66 156 104 162 150 Z" opacity=".82" style="fill:var(--green-deep)"/>
+            <path d="M150 160 C104 150 66 120 60 86 C100 92 138 120 154 158 Z" opacity=".9"/>
+          </g>
+
+          <!-- tissue bloom -->
+          <g class="bloom-pop">
+            <path d="M160 58 C150 34 128 34 124 58 C108 44 90 58 100 78 C120 70 146 74 160 96 C174 74 200 70 220 78 C230 58 212 44 196 58 C192 34 170 34 160 58 Z" style="fill:var(--bloom);stroke:var(--pot-sh);stroke-width:1.2"/>
+            <path d="M160 66 C154 52 142 52 140 66 C150 72 156 80 160 92 C164 80 170 72 180 66 C178 52 166 52 160 66 Z" style="fill:var(--pot-sh)" opacity=".5"/>
+          </g>
+
+          <!-- indicator leaf (droops) lower-right -->
+          <g class="ind-leaf">
+            <path d="M172 150 C214 146 252 128 262 150 C238 176 198 182 168 166 Z" style="fill:var(--green-deep)"/>
+            <path d="M176 156 C206 154 234 146 254 151" style="fill:none;stroke:var(--ground);stroke-width:1.4" opacity=".5"/>
+          </g>
+
+          <!-- pot -->
+          <path d="M96 210 L224 210 L212 344 C211 356 204 362 192 362 L128 362 C116 362 109 356 108 344 Z" style="fill:var(--pot);stroke:var(--pot-sh);stroke-width:1.5"/>
+          <path d="M90 196 L230 196 C236 196 238 202 236 208 L232 218 C231 223 227 226 222 226 L98 226 C93 226 89 223 88 218 L84 208 C82 202 84 196 90 196 Z" style="fill:var(--surface);stroke:var(--pot-sh);stroke-width:1.5"/>
+          <ellipse cx="160" cy="208" rx="66" ry="9" style="fill:var(--pot-sh)" opacity=".45"/>
+        </svg>
+      </div>
+      <p class="stagecap"><b>Full, half, empty.</b> The leaf tells you when it's time.<br><span style="opacity:.75">Design illustration. Final product may vary.</span></p>
+    </div>
+  </div>
+</div>
+
+<div class="wrap">
+  <section class="block" id="how">
+    <div class="sectlabel">How it works</div>
+    <h2>Beautiful first. Useful always.</h2>
+    <p class="blurb">Every home has a tissue box it tries to hide. EverLeaf turns that eyesore into something you actually want on the table.</p>
+    <div class="steps">
+      <div class="step">
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/><path d="M2 21c0-3 1.85-5.36 5.08-6"/></svg></div>
+        <h3>Looks like a plant</h3>
+        <p>A matte ceramic planter with sculpted leaves. It reads as decor, not a dispenser. The tissues bloom from the center like a white flower.</p>
+      </div>
+      <div class="step">
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8h16M4 8l1.2 10.2A2 2 0 0 0 7.2 20h9.6a2 2 0 0 0 2-1.8L20 8M9 8V5a3 3 0 0 1 6 0v3"/></svg></div>
+        <h3>Pulls like tissues</h3>
+        <p>Reach into the bloom and a tissue lifts out, one at a time, exactly how you expect. Forty to a refill.</p>
+      </div>
+      <div class="step">
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v4M7 8a5 5 0 0 1 10 0c0 4-2 5-2 8H9c0-3-2-4-2-8Z"/><path d="M10 20h4"/></svg></div>
+        <h3>Asks for a refill</h3>
+        <p>A hidden mechanism droops one leaf as the tissues run low. No lights, no beeps. The plant just looks like it needs you.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="sectlabel">The signature touch</div>
+    <h2>A leaf that tells you the truth.</h2>
+    <p class="blurb">As tissues are used, the indicator leaf slowly lowers. One glance across the room tells you where things stand.</p>
+    <div class="signal">
+      <div class="sig">
+        <svg viewBox="0 0 80 80" aria-hidden="true"><g style="fill:var(--green)"><path d="M40 62 C24 56 20 34 34 22 C46 32 48 50 44 62 Z"/></g><path d="M40 64 L40 46" style="stroke:var(--green-dk);stroke-width:2.5;stroke-linecap:round"/></svg>
+        <div class="t">Full</div>
+        <div class="d">Leaf stands tall. You're stocked.</div>
+      </div>
+      <div class="sig">
+        <svg viewBox="0 0 80 80" aria-hidden="true"><g style="fill:var(--green)"><path d="M38 50 C22 50 8 40 14 30 C30 28 44 38 46 52 Z"/></g><path d="M40 54 L40 46" style="stroke:var(--green-dk);stroke-width:2.5;stroke-linecap:round"/></svg>
+        <div class="t">Half</div>
+        <div class="d">Leaf levels out. Halfway there.</div>
+      </div>
+      <div class="sig">
+        <svg viewBox="0 0 80 80" aria-hidden="true"><g style="fill:var(--green-deep)"><path d="M40 60 C26 66 10 62 12 50 C28 44 42 48 48 60 Z" opacity=".9"/></g><path d="M40 52 L40 46" style="stroke:var(--green-dk);stroke-width:2.5;stroke-linecap:round"/></svg>
+        <div class="t">Empty</div>
+        <div class="d">Leaf droops. Time to refill.</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="sectlabel">Made to be gifted</div>
+    <div class="gift">
+      <div>
+        <h2>The gift for the person who has everything.</h2>
+        <p class="blurb">Hard to shop for? EverLeaf is the rare object that's pretty, clever, and genuinely useful. It earns a spot on the nicest table in the house.</p>
+        <div class="tags">
+          <span class="tag">Plant lovers</span>
+          <span class="tag">Home decor fans</span>
+          <span class="tag">Housewarmings</span>
+          <span class="tag">The hard-to-shop-for</span>
+        </div>
+      </div>
+      <div class="price">
+        <div class="n">$49.99</div>
+        <div class="c">launch price, est.<br>refills from $13.99</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="sectlabel">Back it early</div>
+    <h2>Founding-backer pricing.</h2>
+    <p class="blurb">When we launch on Kickstarter, backers get EverLeaf before anyone else, at prices we will never offer again. Here is the plan.</p>
+    <div class="plans">
+      <div class="plan">
+        <div class="pk">First 100 only</div>
+        <h3>Super Early Bird</h3>
+        <div class="amt">$34.99</div>
+        <p class="desc">The planter plus your first <strong>40 tissues</strong>, at the lowest price it will ever be. Limited to the first 100 backers.</p>
+      </div>
+      <div class="plan feat">
+        <div class="pk">Best value</div>
+        <h3>Starter Set</h3>
+        <div class="amt">$74.99</div>
+        <p class="desc">The planter plus <strong>3 refill packs</strong>. Months of tissues and a better price than buying apart. The one people gift.</p>
+      </div>
+      <div class="plan">
+        <div class="pk">One for you, one to give</div>
+        <h3>Double Set</h3>
+        <div class="amt">$89.99</div>
+        <p class="desc">Two planters. Keep one, gift one. Plus a Refill Club discount so you never run out.</p>
+      </div>
+    </div>
+    <p class="micro" style="margin-top:18px">Planned pledge levels for launch. Final pricing may shift with the finished product.</p>
+  </section>
+
+  <section class="block">
+    <div class="sectlabel">Why EverLeaf</div>
+    <div class="founder">
+      <div class="mark">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/><path d="M2 21c0-3 1.85-5.36 5.08-6"/></svg>
+      </div>
+      <div>
+        <p class="q">"I kept hiding the tissue box every time someone came over. It felt silly that the one thing everybody reaches for is the one thing nobody wants to look at. EverLeaf is the fix. Something you'd leave out on purpose."</p>
+        <div class="sig">Logan, founder of EverLeaf</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="sectlabel">Good to know</div>
+    <h2>The quick questions.</h2>
+    <div class="faq">
+      <details open>
+        <summary>Does it need special tissues?</summary>
+        <p>No. Standard facial tissues fit. Our refill packs are folded to bloom into the leaf shape, so they look their best, but you are never locked in.</p>
+      </details>
+      <details>
+        <summary>Is it hygienic?</summary>
+        <p>Yes. Tissues sit in an enclosed chamber under the lid. You only ever touch the one you pull, exactly like a regular dispenser.</p>
+      </details>
+      <details>
+        <summary>How do I refill it?</summary>
+        <p>Lift the top, drop in a fresh stack of about 40, and set the lid back. That is the whole thing. Takes ten seconds.</p>
+      </details>
+      <details>
+        <summary>What is the drooping leaf?</summary>
+        <p>A hidden mechanism quietly lowers one leaf as the tissues run low. No batteries, no lights, no beeping. The plant simply looks like it could use some attention.</p>
+      </details>
+      <details>
+        <summary>How does backing work?</summary>
+        <p>We are launching on Kickstarter. You pledge for a reward (a planter, a set), and if the campaign hits its goal your card is charged and we make and ship it. If it does not hit the goal, you are not charged at all. Simple and low risk for you.</p>
+      </details>
+      <details>
+        <summary>When does it ship?</summary>
+        <p>After a successful campaign we place the production run and ship to backers. Join the list and you will get the launch date and a realistic ship window before you pledge, never a promise we cannot keep.</p>
+      </details>
+    </div>
+  </section>
+
+  <section class="block" id="waitlist" style="border:none">
+    <div class="signup">
+      <div class="sectlabel" style="color:rgba(255,255,255,.85)">Launching on Kickstarter</div>
+      <h2>Be first in line to back it.</h2>
+      <p class="blurb">Join the launch list. We'll email you the moment EverLeaf goes live so you can grab the early-bird price before the first 100 sell out.</p>
+      <form id="wl" novalidate>
+        <input id="email" type="email" inputmode="email" placeholder="you@email.com" aria-label="Email address" required>
+        <button type="submit">Join the launch list</button>
+      </form>
+      <div id="wlDone" class="done" hidden></div>
+      <p class="fineprint">No spam. One email when we launch. That's it.</p>
+    </div>
+  </section>
+</div>
+
+<div class="wrap">
+  <footer>
+    <div class="brand" style="font-size:17px"><svg viewBox="0 0 48 48"><path d="M24 43C13 41 6.5 31 8 20.5 9.6 9.8 18.2 5 40 4c.6 8-.4 16.5-6 24.2C29.4 34.6 24 38 24 43Z" fill="var(--green)"/><path d="M31 12C24 17 18.5 25 16 40" fill="none" stroke="#ffffff" stroke-width="2.2" stroke-linecap="round" opacity=".5"/></svg> <span><span style="color:var(--ink)">Ever</span><span style="color:var(--green-deep)">Leaf</span></span></div>
+    <div>A living thing that hands you a tissue. &copy; 2026</div>
+  </footer>
+</div>
+
+<script>
+  var form = document.getElementById("wl");
+  var done = document.getElementById("wlDone");
+  form.addEventListener("submit", function(e){
+    e.preventDefault();
+    var email = document.getElementById("email").value.trim();
+    if(!email || email.indexOf("@") < 1){ document.getElementById("email").focus(); return; }
+    var subject = encodeURIComponent("EverLeaf waitlist signup");
+    var body = encodeURIComponent("Add me to the EverLeaf waitlist.\n\nEmail: " + email);
+    // route the interest to the founder's inbox
+    window.location.href = "mailto:lgnmans@gmail.com?subject=" + subject + "&body=" + body;
+    form.hidden = true;
+    done.hidden = false;
+    done.textContent = "You're on the list. Check your email to confirm and you're set.";
+  });
+</script>
+
+</body>
+</html>
