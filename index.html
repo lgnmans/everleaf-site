@@ -384,6 +384,7 @@
       <p class="blurb">Join the launch list. We'll email you the moment EverLeaf goes live so you can grab the early-bird price before the first 100 sell out.</p>
       <form id="wl" novalidate>
         <input id="email" type="email" inputmode="email" placeholder="you@email.com" aria-label="Email address" required>
+        <input id="company" name="company" type="text" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;top:-9999px;width:1px;height:1px;opacity:0;pointer-events:none">
         <button type="submit">Join the launch list</button>
       </form>
       <div id="wlDone" class="done" hidden></div>
@@ -406,13 +407,22 @@
     e.preventDefault();
     var email = document.getElementById("email").value.trim();
     if(!email || email.indexOf("@") < 1){ document.getElementById("email").focus(); return; }
-    var subject = encodeURIComponent("EverLeaf waitlist signup");
-    var body = encodeURIComponent("Add me to the EverLeaf waitlist.\n\nEmail: " + email);
-    // route the interest to the founder's inbox
-    window.location.href = "mailto:lgnmans@gmail.com?subject=" + subject + "&body=" + body;
-    form.hidden = true;
-    done.hidden = false;
-    done.textContent = "You're on the list. Check your email to confirm and you're set.";
+    var company = (document.getElementById("company")||{}).value || "";
+    var btn = form.querySelector("button[type=submit]");
+    if(btn){ btn.disabled = true; btn.textContent = "Joining..."; }
+    fetch("https://everleaf-waitlist.lgnmans.workers.dev", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email: email, company: company })
+    }).then(function(){
+      form.hidden = true;
+      done.hidden = false;
+      done.textContent = "You\u2019re on the list. Check your inbox for a confirmation.";
+    }).catch(function(){
+      if(btn){ btn.disabled = false; btn.textContent = "Join the launch list"; }
+      done.hidden = false;
+      done.textContent = "Hmm, that didn\u2019t go through \u2014 please try again in a moment.";
+    });
   });
 </script>
 
